@@ -1,0 +1,71 @@
+
+window.addEventListener('load', function(){
+    CookieConsent.run({
+
+        cookie: {
+            name: 'message_popup_cookie',
+            // domain: location.hostname,
+            // path: '/',
+            // sameSite: "Lax",
+            // expiresAfterDays: 182,
+        },
+
+        guiOptions: {
+            consentModal: {
+                layout: 'box wide',
+                position: 'middle center',
+                flipButtons: false,
+                equalWeightButtons: true
+            },
+        },
+        categories: {
+            necessary: {
+                enabled: true,  // this category is enabled by default
+                readOnly: true  // this category cannot be disabled
+            },
+            analytics: {},
+            fake_cookie: {
+                enabled: true,
+            }
+        },
+
+        onFirstConsent: ({cookie}) => {
+            console.log('onFirstConsent fired',cookie);
+        },
+    
+        onConsent: ({cookie}) => {
+            console.log('onConsent fired!', cookie)
+        },
+    
+        onChange: ({changedCategories, changedServices}) => {
+            console.log('onChange fired!', changedCategories, changedServices);
+        },
+    
+        onModalReady: ({modalName}) => {
+            console.log('ready:', modalName);
+        },
+    
+        onModalShow: ({modalName}) => {
+            console.log('visible:', modalName);
+        },
+    
+        onModalHide: ({modalName}) => {
+            console.log('hidden:', modalName);
+        },
+    
+        language: {
+            default: 'en',
+            translations: {
+                en: {
+                    consentModal: {
+                        title: 'Insert Title Here',
+                        description: 'Acceptance criteria here',
+                        acceptAllBtn: 'Accept',
+                        // acceptNecessaryBtn: 'Reject',
+                    },
+                }
+            }
+        }
+    });
+});
+
